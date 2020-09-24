@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 class Game
 {
@@ -17,6 +18,7 @@ public:
 private:
 	bool m_isRunning;
 
+	SDL_Texture* playerTexture;
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
 

@@ -1,5 +1,7 @@
 #include "Game.h"
 
+
+
 Game::Game(const char* title, int x, int y, int width, int height, bool fullscreen)
 {
 	int flags = 0;
@@ -29,6 +31,12 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 		std::cout << SDL_GetError() << std::endl;
 		m_isRunning = false;
 	}
+
+	int w, h;
+	playerTexture = IMG_LoadTexture(m_renderer, "assets/Player.png");
+	SDL_QueryTexture(playerTexture, NULL, NULL, &w, &h);
+
+	std::cout << SDL_GetError();
 }
 
 Game::~Game()
@@ -50,12 +58,16 @@ void Game::eventHandler()
 
 void Game::update()
 {
+
 }
 
 void Game::render()
 {
 	SDL_RenderClear(m_renderer);
-	// This is where we will draw to the screen
+	
+	SDL_RenderCopy(m_renderer, playerTexture, NULL, NULL);
+
+	SDL_RenderPresent(m_renderer);
 }
 
 void Game::clean()
