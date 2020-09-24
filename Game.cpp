@@ -32,9 +32,7 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 		m_isRunning = false;
 	}
 
-	int w, h;
-	playerTexture = IMG_LoadTexture(m_renderer, "assets/Player.png");
-	SDL_QueryTexture(playerTexture, NULL, NULL, &w, &h);
+	playerTexture = TextureManager::loadTexture("assets/Player.png", m_renderer);
 
 	std::cout << SDL_GetError();
 }
