@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 #include <iostream>
 #include "TextureManager.h"
+#include "GameObject.h"
 class Game
 {
 public:
@@ -19,9 +20,7 @@ public:
 private:
 	bool m_isRunning;
 
-	SDL_Texture* playerTexture;
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
-
 };
 

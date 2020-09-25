@@ -1,6 +1,10 @@
 #include "Game.h"
 
 
+GameObject* player;
+GameObject* enemySlime;
+
+
 
 Game::Game(const char* title, int x, int y, int width, int height, bool fullscreen)
 {
@@ -32,9 +36,10 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 		m_isRunning = false;
 	}
 
-	playerTexture = TextureManager::loadTexture("assets/Player.png", m_renderer);
+	player = new GameObject("assets/Player.png", m_renderer, 0, 0, 3);
+	enemySlime = new GameObject("assets/Slime.png", m_renderer, 64, 64);
 
-	std::cout << SDL_GetError();
+
 }
 
 Game::~Game()
@@ -56,15 +61,15 @@ void Game::eventHandler()
 
 void Game::update()
 {
-
+	player->update();
+	enemySlime->update();
 }
 
 void Game::render()
 {
 	SDL_RenderClear(m_renderer);
-	
-	SDL_RenderCopy(m_renderer, playerTexture, NULL, NULL);
-
+	player->render();
+	enemySlime->render();
 	SDL_RenderPresent(m_renderer);
 }
 
