@@ -53,6 +53,8 @@ void Map::loadMap(int arr[20][25])
 	dest.y = 0;
 	dest.w = 32;
 	dest.h = 32;
+
+	std::cout << "Map loaded...\n";
 }
 
 void Map::drawMap()

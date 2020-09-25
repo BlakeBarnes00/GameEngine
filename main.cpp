@@ -27,7 +27,8 @@ int main(int argc, char* argv[]) {
 	}
 
 	game->clean();
-	
+
+	delete game;
 	std::cin.get();
 	return 0;
 }

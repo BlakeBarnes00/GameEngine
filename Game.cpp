@@ -80,7 +80,9 @@ void Game::clean()
 	SDL_DestroyWindow(m_window);
 	SDL_DestroyRenderer(renderer);
 	std::cout << "Window and renderer destroyed...\n";
-
+	
+	delete player, enemySlime, map; // Delete objects when exiting the game
+	std::cout << "Deleted game objects...\n";
 }
 
 bool Game::running()

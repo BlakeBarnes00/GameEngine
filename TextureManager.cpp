@@ -5,7 +5,11 @@ SDL_Texture* TextureManager::loadTexture(const char* fileName)
 	SDL_Surface* tempSurface = IMG_Load(fileName);
 	SDL_Texture* texture = IMG_LoadTexture(Game::renderer, fileName);
 	SDL_FreeSurface(tempSurface);
-	std::cout << SDL_GetError() << std::endl;
+	if (texture == NULL)
+		std::cout << SDL_GetError();
+	else
+		std::cout << fileName << " loaded with no errors\n";
+	
 	return texture;
 }
 
