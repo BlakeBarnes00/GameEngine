@@ -1,10 +1,15 @@
 #include "TextureManager.h"
 
-SDL_Texture* TextureManager::loadTexture(const char* fileName, SDL_Renderer* renderer)
+SDL_Texture* TextureManager::loadTexture(const char* fileName)
 {
 	SDL_Surface* tempSurface = IMG_Load(fileName);
-	SDL_Texture* texture = IMG_LoadTexture(renderer, fileName);
+	SDL_Texture* texture = IMG_LoadTexture(Game::renderer, fileName);
 	SDL_FreeSurface(tempSurface);
 	std::cout << SDL_GetError() << std::endl;
 	return texture;
+}
+
+void TextureManager::draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest)
+{
+	SDL_RenderCopy(Game::renderer, texture, &src, &dest);
 }

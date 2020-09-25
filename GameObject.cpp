@@ -1,22 +1,20 @@
 #include "GameObject.h"
 
 
-GameObject::GameObject(const char* textureSheet, SDL_Renderer* renderer, int x, int y)
+GameObject::GameObject(const char* textureSheet, int x, int y)
 {
 	m_x = x;
 	m_y = y;
-	m_renderer = renderer;
 	m_scale = 1;
-	objTexture = TextureManager::loadTexture(textureSheet, renderer);
+	objTexture = TextureManager::loadTexture(textureSheet);
 }
 
-GameObject::GameObject(const char* textureSheet, SDL_Renderer* renderer, int x, int y, float scale)
+GameObject::GameObject(const char* textureSheet, int x, int y, float scale)
 {
 	m_x = x;
 	m_y = y;
-	m_renderer = renderer;
 	m_scale = scale;
-	objTexture = TextureManager::loadTexture(textureSheet, renderer);
+	objTexture = TextureManager::loadTexture(textureSheet);
 }
 
 GameObject::~GameObject()
@@ -42,5 +40,5 @@ void GameObject::update()
 
 void GameObject::render()
 {
-	SDL_RenderCopy(m_renderer, objTexture, &srcRect, &destRect);
+	SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
 }

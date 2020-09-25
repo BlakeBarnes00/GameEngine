@@ -14,13 +14,14 @@ public:
 	void update();
 	void render();
 	void clean();
-
 	bool running();
+
+	static SDL_Renderer* renderer;
+
 
 private:
 	bool m_isRunning;
 
 	SDL_Window* m_window;
-	SDL_Renderer* m_renderer;
 };
 
