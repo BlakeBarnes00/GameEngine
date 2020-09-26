@@ -1,11 +1,18 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include "GameObject.h"
 #include "Map.h"
+#include "EntityComponentSystem.h"
+#include "Components.h"
 
 SDL_Renderer* Game::renderer = NULL;
 
-GameObject* player;
-GameObject* enemySlime;
-Map* map;
+GameObject* player = NULL;
+GameObject* enemySlime = NULL;
+Map* map = NULL;
+
+Manager manager;
+auto& newPlayer(manager.addEntity());
 
 Game::Game(const char* title, int x, int y, int width, int height, bool fullscreen)
 {
@@ -40,7 +47,8 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 	player = new GameObject("assets/Player.png", 0, 0, 3);
 	enemySlime = new GameObject("assets/Slime.png",64, 64);
 	map = new Map();
-
+	
+	newPlayer.addComponent<PositionComponent>();
 }
 
 Game::~Game()
@@ -62,8 +70,17 @@ void Game::eventHandler()
 
 void Game::update()
 {
+	// limit fps
+	frameStart = SDL_GetTicks();
+	if (frameDelay > frameTime)
+		SDL_Delay(frameDelay - frameTime);
+
 	player->update();
 	enemySlime->update();
+	manager.update();
+
+	std::cout << newPlayer.getComponent<PositionComponent>().x()<< ", " <<
+		newPlayer.getComponent <PositionComponent>().y() << std::endl;
 }
 
 void Game::render()

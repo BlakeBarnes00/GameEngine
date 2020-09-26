@@ -20,6 +20,11 @@ public:
 
 
 private:
+	const int FPS = 60;
+	const int frameDelay = 1000 / FPS;
+	Uint32 frameStart;
+	int frameTime;
+
 	bool m_isRunning;
 
 	SDL_Window* m_window;
