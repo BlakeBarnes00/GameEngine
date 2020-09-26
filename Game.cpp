@@ -3,7 +3,9 @@
 #include "Map.h"
 #include "EntityComponentSystem/Components.h"
 
+SDL_Event Game::event;
 SDL_Renderer* Game::renderer = NULL;
+
 Map* map = NULL;
 Manager manager;
 auto& player(manager.addEntity());
@@ -43,6 +45,7 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 	
 	player.addComponent<TransformComponent>().setPosition(50, 50);
 	player.addComponent<SpriteComponent>("assets/Player.png", 2);
+	player.addComponent<KeyboardController>();
 
 	slime.addComponent<TransformComponent>();
 	slime.addComponent<SpriteComponent>("assets/slime.png", 1);
@@ -55,7 +58,6 @@ Game::~Game()
 
 void Game::eventHandler()
 {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.type)
 	{
@@ -76,7 +78,6 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	player.getComponent<TransformComponent>().position.Add(Vector2D(5, 0));
 
 }
 

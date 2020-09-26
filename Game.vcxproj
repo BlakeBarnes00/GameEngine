@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="EntityComponentSystem\Components.h" />
     <ClInclude Include="EntityComponentSystem\EntityComponentSystem.h" />
+    <ClInclude Include="EntityComponentSystem\KeyboardController.h" />
     <ClInclude Include="EntityComponentSystem\TransformComponent.h" />
     <ClInclude Include="EntityComponentSystem\SpriteComponent.h" />
     <ClInclude Include="Vector2D.h" />
