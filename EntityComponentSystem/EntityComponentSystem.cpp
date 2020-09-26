@@ -3,12 +3,11 @@
 void Entity::update()
 {
 	for (auto& c : components) c->update();
-	for (auto& c : components) c->draw();
-
 }
 
 void Entity::draw()
 {
+	for (auto& c : components) c->draw();
 }
 
 void Manager::update()

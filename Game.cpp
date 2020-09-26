@@ -1,18 +1,13 @@
 #include "Game.h"
 #include "TextureManager.h"
-#include "GameObject.h"
 #include "Map.h"
-#include "EntityComponentSystem.h"
-#include "Components.h"
+#include "EntityComponentSystem/Components.h"
 
 SDL_Renderer* Game::renderer = NULL;
-
-GameObject* player = NULL;
-GameObject* enemySlime = NULL;
 Map* map = NULL;
-
 Manager manager;
-auto& newPlayer(manager.addEntity());
+auto& player(manager.addEntity());
+auto& slime(manager.addEntity());
 
 Game::Game(const char* title, int x, int y, int width, int height, bool fullscreen)
 {
@@ -44,11 +39,14 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 		m_isRunning = false;
 	}
 
-	player = new GameObject("assets/Player.png", 0, 0, 3);
-	enemySlime = new GameObject("assets/Slime.png",64, 64);
 	map = new Map();
 	
-	newPlayer.addComponent<PositionComponent>();
+	player.addComponent<TransformComponent>().setPosition(50, 50);
+	player.addComponent<SpriteComponent>("assets/Player.png", 2);
+
+	slime.addComponent<TransformComponent>();
+	slime.addComponent<SpriteComponent>("assets/slime.png", 1);
+	
 }
 
 Game::~Game()
@@ -74,21 +72,20 @@ void Game::update()
 	frameStart = SDL_GetTicks();
 	if (frameDelay > frameTime)
 		SDL_Delay(frameDelay - frameTime);
-
-	player->update();
-	enemySlime->update();
+	
+	manager.refresh();
 	manager.update();
 
-	std::cout << newPlayer.getComponent<PositionComponent>().x()<< ", " <<
-		newPlayer.getComponent <PositionComponent>().y() << std::endl;
+	player.getComponent<TransformComponent>().position.Add(Vector2D(5, 0));
+
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
 	map->drawMap();
-	player->render();
-	enemySlime->render();
+
+	manager.draw();
 	SDL_RenderPresent(renderer);
 }
 
@@ -98,7 +95,7 @@ void Game::clean()
 	SDL_DestroyRenderer(renderer);
 	std::cout << "Window and renderer destroyed...\n";
 	
-	delete player, enemySlime, map; // Delete objects when exiting the game
+	delete map; // Delete objects when exiting the game
 	std::cout << "Deleted game objects...\n";
 }
 
