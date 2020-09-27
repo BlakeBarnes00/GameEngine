@@ -3,7 +3,6 @@
 #include <SDL_image.h>
 #include <iostream>
 #include "TextureManager.h"
-#include "GameObject.h"
 class Game
 {
 public:

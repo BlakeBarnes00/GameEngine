@@ -154,15 +154,17 @@
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="EntityComponentSystem\EntityComponentSystem.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="EntityComponentSystem\ColliderComponent.h" />
     <ClInclude Include="EntityComponentSystem\Components.h" />
     <ClInclude Include="EntityComponentSystem\EntityComponentSystem.h" />
     <ClInclude Include="EntityComponentSystem\KeyboardController.h" />
@@ -170,7 +172,6 @@
     <ClInclude Include="EntityComponentSystem\SpriteComponent.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>

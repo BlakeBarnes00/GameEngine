@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "Map.h"
+#include "Collision.h"
 #include "EntityComponentSystem/Components.h"
 
 SDL_Event Game::event;
@@ -8,8 +9,9 @@ SDL_Renderer* Game::renderer = NULL;
 
 Map* map = NULL;
 Manager manager;
+
 auto& player(manager.addEntity());
-auto& slime(manager.addEntity());
+auto& wall(manager.addEntity());
 
 Game::Game(const char* title, int x, int y, int width, int height, bool fullscreen)
 {
@@ -43,13 +45,14 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 
 	map = new Map();
 	
-	player.addComponent<TransformComponent>().setPosition(50, 50);
-	player.addComponent<SpriteComponent>("assets/Player.png", 2);
+	player.addComponent<TransformComponent>().setPosition(350, 350, 32, 32, 2);
+	player.addComponent<SpriteComponent>("assets/Player.png");
 	player.addComponent<KeyboardController>();
+	player.addComponent<ColliderComponent>("player");
 
-	slime.addComponent<TransformComponent>();
-	slime.addComponent<SpriteComponent>("assets/slime.png", 1);
-	
+	wall.addComponent<TransformComponent>().setPosition(300, 300, 300, 20, 1);
+	wall.addComponent<SpriteComponent>("assets/dirt.png");
+	wall.addComponent<ColliderComponent>("wall");
 }
 
 Game::~Game()
@@ -77,6 +80,11 @@ void Game::update()
 	
 	manager.refresh();
 	manager.update();
+	if (Collision::AABB(player.getComponent<ColliderComponent>().collider,
+		wall.getComponent<ColliderComponent>().collider)) {
+		//player.getComponent<TransformComponent>().scale = 1;
+		//std::cout << "Wall hit\n";
+	}
 
 
 }
