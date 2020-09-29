@@ -45,14 +45,16 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 
 	map = new Map();
 	
-	player.addComponent<TransformComponent>().setPosition(350, 350, 32, 32, 2);
+	wall.addComponent<TransformComponent>(300, 300, 1);
+	wall.addComponent<SpriteComponent>("assets/dirt.png");
+	wall.addComponent<ColliderComponent>("wall");
+
+	player.addComponent<TransformComponent>(3);
 	player.addComponent<SpriteComponent>("assets/Player.png");
 	player.addComponent<KeyboardController>();
 	player.addComponent<ColliderComponent>("player");
 
-	wall.addComponent<TransformComponent>().setPosition(300, 300, 300, 20, 1);
-	wall.addComponent<SpriteComponent>("assets/dirt.png");
-	wall.addComponent<ColliderComponent>("wall");
+	
 }
 
 Game::~Game()
@@ -82,8 +84,8 @@ void Game::update()
 	manager.update();
 	if (Collision::AABB(player.getComponent<ColliderComponent>().collider,
 		wall.getComponent<ColliderComponent>().collider)) {
-		//player.getComponent<TransformComponent>().scale = 1;
-		//std::cout << "Wall hit\n";
+		player.getComponent<TransformComponent>().velocity * -1;
+		std::cout << "Wall hit\n";
 	}
 
 

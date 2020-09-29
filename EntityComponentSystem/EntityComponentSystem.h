@@ -6,13 +6,12 @@
 #include <bitset>
 #include <array>
 
-
 class Component;
 class Entity;
 
 using ComponentID = std::size_t;
 
-inline ComponentID getComponentID()
+inline ComponentID getNewComponentTypeID()
 {
 	static ComponentID lastID = 0;
 	return lastID++;
@@ -20,7 +19,7 @@ inline ComponentID getComponentID()
 
 template <typename T> inline ComponentID getComponentTypeID() noexcept
 {
-	static ComponentID typeID = getComponentID();
+	static ComponentID typeID = getNewComponentTypeID();
 	return typeID;
 }
 
@@ -30,8 +29,9 @@ using ComponentArray = std::array<Component*, maxComponents>;
 
 class Component {
 public:
+	Component() {}
+
 	Entity* entity;
-	
 	virtual void init();
 	virtual void update();
 	virtual void draw();
@@ -48,6 +48,8 @@ private:
 	ComponentBitSet componentBitSet;
 
 public:
+	Entity() {}
+
 	void update();
 	void draw();
 	bool isActive() const { return active; }

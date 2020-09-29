@@ -60,6 +60,20 @@ Vector2D& Vector2D::operator/=(const Vector2D& vec)
 	return this->Divide(vec);
 }
 
+Vector2D& Vector2D::operator*(const int& i)
+{
+	this->mx *= i;
+	this->my *= i;
+	return *this;
+}
+
+Vector2D& Vector2D::zero()
+{
+	this->mx *= 0;
+	this->my *= 0;
+	return *this;
+}
+
 Vector2D& operator+(Vector2D& v1, const Vector2D& v2)
 {
 	return v1.Add(v2);

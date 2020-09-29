@@ -1,58 +1,59 @@
 #pragma once
 #include "EntityComponentSystem.h"
 #include "../Vector2D.h"
-struct TransformComponent : public Component
+
+class TransformComponent : public Component
 {
+public:
 	Vector2D position;
 	Vector2D velocity;
 
 	int height = 32;
 	int width = 32;
 	int scale = 1;
+
 	int speed = 3;
 
-	TransformComponent() {
-		init();
+	TransformComponent()
+	{
+		position.zero();
 	}
-	TransformComponent(float x, float y) {
+
+	TransformComponent(int sc)
+	{
+		position.zero();
+		scale = sc;
+	}
+
+	TransformComponent(float x, float y)
+	{
+		position.zero();
+	}
+
+	TransformComponent(float x, float y, int scale)
+	{
 		position.mx = x;
 		position.my = y;
+		this->scale = scale;
 	}
-	TransformComponent(float x, float y, int w, int h, int scale) {
+
+	TransformComponent(float x, float y, int h, int w, int sc)
+	{
 		position.mx = x;
 		position.my = y;
 		height = h;
 		width = w;
-		this->scale = scale;
+		scale = sc;
 	}
 
-	void init() override {
-		velocity.mx = 0;
-		velocity.my = 0;
-		position.mx = 0;
-		position.my = 0;
+	void init() override
+	{
+		velocity.zero();
 	}
-	
-	void update() override {
-		position.mx += velocity.mx * speed;
-		position.my += velocity.my * speed;
-		std::cout << position.mx << "," << position.my << std::endl;
-
-	}
-
-	void setPosition(int x, int y) {
-		position.mx = x;
-		position.my = y;
-	}
-
-	void setPosition(int x, int y, int w, int h, int scale) {
-		position.mx = x;
-		position.my = y;
-
-		width = w;
-		height = h;
-		this->scale = scale;
-
+	void update() override
+	{
+		position.mx += static_cast<int>(velocity.mx * speed);
+		position.my += static_cast<int>(velocity.my * speed);
 	}
 
 };
