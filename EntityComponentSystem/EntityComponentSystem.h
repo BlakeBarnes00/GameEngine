@@ -56,7 +56,7 @@ public:
 	void destroy() { active = false; }
 
 	template <typename T> bool hasComponent() const {
-		return componentBitSet[getComponentID()];
+		return componentBitSet[getComponentTypeID<T>()];
 	}
 
 	template <typename T, typename... TArgs> T& addComponent(TArgs&& ... mArgs) {
