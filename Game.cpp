@@ -7,11 +7,16 @@
 SDL_Event Game::event;
 SDL_Renderer* Game::renderer = NULL;
 
-Map* map = NULL;
+Map* map;
 Manager manager;
+
+std::vector<ColliderComponent*> Game::colliders;
 
 auto& player(manager.addEntity());
 auto& wall(manager.addEntity());
+auto& tile0(manager.addEntity());
+auto& tile1(manager.addEntity());
+auto& tile2(manager.addEntity());
 
 Game::Game(const char* title, int x, int y, int width, int height, bool fullscreen)
 {
@@ -45,6 +50,14 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 
 	map = new Map();
 	
+	tile0.addComponent<TileComponent>(100, 100, 0);
+	tile1.addComponent<TileComponent>(200, 100, 1);
+	tile1.addComponent<ColliderComponent>("dirt");
+	tile2.addComponent<TileComponent>(300, 100, 2);
+	tile1.addComponent<ColliderComponent>("grass");
+
+
+
 	wall.addComponent<TransformComponent>(300, 300, 1);
 	wall.addComponent<SpriteComponent>("assets/dirt.png");
 	wall.addComponent<ColliderComponent>("wall");

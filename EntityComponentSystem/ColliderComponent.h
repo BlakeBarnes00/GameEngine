@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include "SDL.h"
 #include "Components.h"
@@ -18,6 +19,8 @@ public:
 			entity->addComponent<TransformComponent>();
 		}
 		transform = &entity->getComponent<TransformComponent>();
+
+		Game::colliders.push_back(this);
 	}
 
 	void update() override {
