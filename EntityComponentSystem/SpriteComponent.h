@@ -12,44 +12,13 @@ private:
 	int scale;
 
 public:
-	SpriteComponent() = default;
-	SpriteComponent(const char* fileName) : scale(1){
-		setTexture(fileName);
-	}
-	SpriteComponent(const char* fileName, int scale) {
-		setTexture(fileName);
-		this->scale = scale;
-	}
-	
-	~SpriteComponent() {
-		SDL_DestroyTexture(texture);
-		std::cout << "Destroyed texture...\n";
-		delete texture;
-		delete transform;
-	}
+	SpriteComponent();
+	SpriteComponent(const char* fileName);
+	SpriteComponent(const char* fileName, int scale);
+	~SpriteComponent();
 
-	void setTexture(const char* fileName) {
-		texture = TextureManager::loadTexture(fileName);
-	}
-
-	void init() override {
-		transform = &entity->getComponent<TransformComponent>();
-
-		srcRect.x = srcRect.y = 0;
-		srcRect.h = transform->height;
-		srcRect.w = transform->width;
-		destRect.w = destRect.h = 32 * scale;
-	}
-
-	void update() override {
-		destRect.x = static_cast<int>(transform->position.mx);
-		destRect.y = static_cast<int>(transform->position.my);
-		destRect.w = transform->width * transform->scale;
-		destRect.h = transform->height * transform->scale;
-	}
-
-	void draw() override {
-		TextureManager::draw(texture, srcRect, destRect);
-	}
-
+	void setTexture(const char* fileName);
+	void init() override;
+	void update() override;
+	void draw() override;
 };

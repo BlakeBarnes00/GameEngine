@@ -155,8 +155,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="EntityComponentSystem\ColliderComponent.cpp" />
     <ClCompile Include="EntityComponentSystem\EntityComponentSystem.cpp" />
+    <ClCompile Include="EntityComponentSystem\KeyboardController.cpp" />
+    <ClCompile Include="EntityComponentSystem\SpriteComponent.cpp" />
+    <ClCompile Include="EntityComponentSystem\TileComponent.cpp" />
     <ClCompile Include="EntityComponentSystem\TileComponent.h" />
+    <ClCompile Include="EntityComponentSystem\TransformComponent.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
