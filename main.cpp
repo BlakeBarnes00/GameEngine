@@ -16,4 +16,4 @@ int main(int argc, char** argv) {
 	delete game;
 	std::cin.get();
 	return 0;
-}
+} 

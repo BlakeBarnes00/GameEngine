@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "C/C++: g++.exe build active file",
+			"command": "D:\\MinGW\\bin\\g++.exe",
+			"args": [
+				"-g",
+				"-std=c++11",
+				"**.cpp",
+				"**.h",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-LD:\\Libraries\\SDL2\\lib\\x86", "-lSDL2", "-lSDL2_image", "-llibpng16-16", "-lzlib1",
+				"-ID:\\Libraries\\SDL2\\include\\SDL2"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build"
+		}
+	]
+}

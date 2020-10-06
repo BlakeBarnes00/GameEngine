@@ -51,12 +51,7 @@ Game::Game(const char* title, int x, int y, int width, int height, bool fullscre
 	map = new Map();
 	
 	tile0.addComponent<TileComponent>(100, 100, 0);
-	tile1.addComponent<TileComponent>(200, 100, 1);
-	tile1.addComponent<ColliderComponent>("dirt");
-	tile2.addComponent<TileComponent>(300, 100, 2);
-	tile1.addComponent<ColliderComponent>("grass");
-
-
+	tile0.addComponent<ColliderComponent>("Water wall");
 
 	wall.addComponent<TransformComponent>(300, 300, 1);
 	wall.addComponent<SpriteComponent>("assets/dirt.png");
