@@ -1,1 +1,0 @@
-g++ -std=c++11 -mwindows -g **.cpp **.h -ID:/Libraries/SDL2/include/SDL2 -ID:/Libraries/SDL2/include/ -LD:/Libraries/SDL2/lib/x86 -lSDL2 -llibpng16-16 -lSDL2_image -lzlib1 -o Test.exe 
